@@ -21,6 +21,7 @@ public class Beatmap {
 	private int duration;
 	private float speed;
 	private Music music;
+	private float difficulty;
 	
 	private ArrayList<Float> lane1 = new ArrayList<Float>();
 	private ArrayList<Float> lane2 = new ArrayList<Float>();
@@ -53,7 +54,7 @@ public class Beatmap {
 				String[] split = line.split("/");
 				String info = split[0];
 				String data = split[1];
-				System.out.println(data);
+				System.out.println(info+": "+data);
 				switch(info.toLowerCase()) {
 				case "name":
 					name = data;
@@ -63,6 +64,9 @@ public class Beatmap {
 					break;
 				case "speed":
 					speed = Float.parseFloat(data);
+					break;
+				case "difficulty":
+					difficulty = Float.parseFloat(data);
 					break;
 				case "path":
 					music = Gdx.audio.newMusic(new FileHandle(new File(songstorage.getPath()+"\\"+data)));
@@ -110,6 +114,10 @@ public class Beatmap {
 
 	protected Music getMusic() {
 		return music;
+	}
+	
+	protected float getDifficulty() {
+		return difficulty;
 	}
 	
 	protected ArrayList<ArrayList<Float>> getLanes(){

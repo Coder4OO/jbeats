@@ -25,13 +25,18 @@ public class Stage {
 		this.song = song;
 		this.x = x;
 		this.width = width;
+	}
+	
+	public void load() {
+		generate_lanes();
 		start();
 	}
 	
-	private void start() {
-		generate_lanes();
-		song.getMusic().play();
-		started = true;
+	public void start() {
+		if(!started) {
+			song.getMusic().play();
+			started = true;
+		}
 	}
 	
 	public void logic() {

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.greenmeows.jbeats.Game;
@@ -19,7 +18,6 @@ public class Lane {
 	private float speed;
 	private float x,y,width;
 	private float origin;
-	private boolean activated = false;
 	private Receptor hitbox;
 	private Texture hitTexture = new Texture(Gdx.files.internal("hitnote.png"));
 	private Texture defaultTexture = new Texture(Gdx.files.internal("note.png"));
@@ -83,14 +81,6 @@ public class Lane {
 		return speed;
 	}
 	
-	public void setActivated(boolean activated) {
-		this.activated = activated;
-	}
-	
-	public boolean getActivated() {
-		return activated;
-	}
-	
 
 	private void antilag() {
 		for(Iterator<Float> it = notes.iterator(); it.hasNext();) {
@@ -145,19 +135,23 @@ public class Lane {
 			int closestnote = get_closest_note();
 			float time = renderednotes.get(closestnote).calculateMs(hitY);
 			if(time <= Constants.TIMING_MARVELLOUS) {
+				System.out.println("MARVELLOUS!");
 				renderednotes.remove(closestnote);
 				return Constants.SCORE_MARVELLOUS;
 			}
 			else if(time > Constants.TIMING_MARVELLOUS && time <= Constants.TIMING_PERFECT) {
+				System.out.println("PERFECT");
 				renderednotes.remove(closestnote);
 				return Constants.SCORE_PERFECT;
 			}
 			else if(time > Constants.TIMING_PERFECT && time <= Constants.TIMING_GREAT) {
 				renderednotes.remove(closestnote);
+				System.out.println("GREAT");
 				return Constants.SCORE_GREAT;
 			}
 			else if(time > Constants.TIMING_GREAT && time <= Constants.TIMING_OKAY) {
 				renderednotes.remove(closestnote);
+				System.out.println("OKAY");
 				return Constants.SCORE_OKAY;
 			}
 			else {
@@ -170,9 +164,11 @@ public class Lane {
 	}
 	
 	private void handle_hit() {
-		if(Gdx.input.isKeyJustPressed(keybind)) {
+		if(Gdx.input.isKeyPressed(keybind)) {
 			hitbox.setSprite(new Sprite(defaultTexture));
-			getAccuracyScore();
+			if(Gdx.input.isKeyJustPressed(keybind)) {
+				getAccuracyScore();
+			}
 		}
 		else {
 			hitbox.setSprite(new Sprite(hitTexture));

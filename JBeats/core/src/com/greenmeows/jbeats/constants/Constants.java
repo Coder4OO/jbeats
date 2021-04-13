@@ -1,7 +1,11 @@
 package com.greenmeows.jbeats.constants;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+
+import com.greenmeows.jbeats.song.Song;
 
 public class Constants {
 	public static final int WIDTH = 1280;
@@ -23,11 +27,34 @@ public class Constants {
 	public static final float SCORE_GREAT = 3;
 	public static final float SCORE_OKAY = 1;
 	
+	//game states
+	public static Song CURRENTSONG;
+	public static final int MENU = 0;
+	public static final int STAGE = 1;
+	public static final int RESULTS = 2;
+	public static final int QUIT = 3;
+	public static int CURRENTSTATE = MENU;
+	
+	//UTIL
+	
 	public static String get_song_file() {
 		String pwd = System.getProperty("user.dir");
 		Path folder = Paths.get(pwd);
 		String parent = folder.getParent().toString();
 		String path = parent+"\\"+"core"+"\\"+"assets"+"\\"+"songs"+"\\";
 		return path;
+	}
+	
+	public static ArrayList<Song> getAllSongs(){
+		ArrayList<Song> songs = new ArrayList<Song>();
+		String songfolder = get_song_file();
+		File songfile = new File(songfolder);
+		String[] songfolders = songfile.list();
+		for(int i=0; i < songfolders.length; i++) {
+			String beatmap = songfolders[i];
+			Song song = new Song(songfolder + "\\" + beatmap);
+			songs.add(song);
+		}
+		return songs;
 	}
 }

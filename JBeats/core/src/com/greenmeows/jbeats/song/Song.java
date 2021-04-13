@@ -12,6 +12,7 @@ public class Song {
 	private String path;
 	private Music music;
 	private Beatmap beatmap;
+	private float difficulty;
 	
 	public Song(String beatmappath) {
 		this.beatmap = new Beatmap(beatmappath);
@@ -19,6 +20,7 @@ public class Song {
 		this.speed = beatmap.getSpeed();
 		this.name = beatmap.getName();
 		this.music = beatmap.getMusic();
+		this.difficulty = beatmap.getDifficulty();
 	}
 	
 	public String getName() {
@@ -55,6 +57,10 @@ public class Song {
 	
 	public ArrayList<ArrayList<Float>> getLanes(){
 		return beatmap.getLanes();
+	}
+	
+	public float getDifficulty() {
+		return difficulty;
 	}
 	
 }
