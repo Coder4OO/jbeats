@@ -21,6 +21,7 @@ public class Lane {
 	private Receptor hitbox;
 	private Texture hitTexture = new Texture(Gdx.files.internal("hitnote.png"));
 	private Texture defaultTexture = new Texture(Gdx.files.internal("note.png"));
+	private int[] judgementstotal = new int[4];
 	
 	private float calculate_scroll_speed() {
 		float bpm = song.getSpeed();
@@ -81,6 +82,9 @@ public class Lane {
 		return speed;
 	}
 	
+	public int[] getJudgements() {
+		return judgementstotal;
+	}
 
 	private void antilag() {
 		for(Iterator<Float> it = notes.iterator(); it.hasNext();) {
@@ -137,21 +141,25 @@ public class Lane {
 			if(time <= Constants.TIMING_MARVELLOUS) {
 				System.out.println("MARVELLOUS!");
 				renderednotes.remove(closestnote);
+				judgementstotal[0]++;
 				return Constants.SCORE_MARVELLOUS;
 			}
 			else if(time > Constants.TIMING_MARVELLOUS && time <= Constants.TIMING_PERFECT) {
 				System.out.println("PERFECT");
 				renderednotes.remove(closestnote);
+				judgementstotal[1]++;
 				return Constants.SCORE_PERFECT;
 			}
 			else if(time > Constants.TIMING_PERFECT && time <= Constants.TIMING_GREAT) {
 				renderednotes.remove(closestnote);
 				System.out.println("GREAT");
+				judgementstotal[2]++;
 				return Constants.SCORE_GREAT;
 			}
 			else if(time > Constants.TIMING_GREAT && time <= Constants.TIMING_OKAY) {
 				renderednotes.remove(closestnote);
 				System.out.println("OKAY");
+				judgementstotal[3]++;
 				return Constants.SCORE_OKAY;
 			}
 			else {

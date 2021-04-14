@@ -38,7 +38,7 @@ public class Game extends ApplicationAdapter {
 	}
 
 	public static void create_new_stage() {
-		stage = new Stage(Constants.CURRENTSONG, Constants.WIDTH/7.5F, 250);
+		stage = new Stage(Constants.CURRENTSONG, Constants.WIDTH/4F, 200);
 		Constants.CURRENTSTATE = Constants.STAGE;
 		stage.load();
 	}
@@ -90,4 +90,9 @@ public class Game extends ApplicationAdapter {
 	public static SpriteBatch getBatch() {
 		return batch;
 	}
+	
+	public static FreeTypeFontGenerator getGenerator() {
+		return generator;
+	}
+	
 }

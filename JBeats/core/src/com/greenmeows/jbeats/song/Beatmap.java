@@ -22,6 +22,8 @@ public class Beatmap {
 	private float speed;
 	private Music music;
 	private float difficulty;
+	private int notecount;
+	
 	
 	private ArrayList<Float> lane1 = new ArrayList<Float>();
 	private ArrayList<Float> lane2 = new ArrayList<Float>();
@@ -79,15 +81,19 @@ public class Beatmap {
 					switch(i) {
 					case 0:
 						lane1.add(Float.parseFloat(lanevalues[i]));
+						notecount += Float.parseFloat(lanevalues[i]);
 						break;
 					case 1:
 						lane2.add(Float.parseFloat(lanevalues[i]));
+						notecount += Float.parseFloat(lanevalues[i]);
 						break;
 					case 2:
 						lane3.add(Float.parseFloat(lanevalues[i]));
+						notecount += Float.parseFloat(lanevalues[i]);
 						break;
 					case 3:
 						lane4.add(Float.parseFloat(lanevalues[i]));
+						notecount += Float.parseFloat(lanevalues[i]);
 						break;
 					}
 				}
@@ -122,6 +128,10 @@ public class Beatmap {
 	
 	protected ArrayList<ArrayList<Float>> getLanes(){
 		return lanes;
+	}
+	
+	protected int getNotecount() {
+		return notecount;
 	}
 
 	public Beatmap(String path) {

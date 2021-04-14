@@ -63,4 +63,8 @@ public class Song {
 		return difficulty;
 	}
 	
+	public int getNotecount() {
+		return beatmap.getNotecount();
+	}
+	
 }
