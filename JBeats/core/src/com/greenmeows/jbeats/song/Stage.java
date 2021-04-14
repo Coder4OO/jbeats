@@ -18,7 +18,6 @@ public class Stage {
 	private boolean started = false;
 	private long timestarted;
 	private long endtime;
-	private float accuracy;
 	private int[] judgements;
 	private FreeTypeFontParameter accuracyparam = new FreeTypeFontParameter();
 	private BitmapFont accuracydisplayfont;

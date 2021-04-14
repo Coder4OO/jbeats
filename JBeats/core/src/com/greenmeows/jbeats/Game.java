@@ -33,8 +33,6 @@ public class Game extends ApplicationAdapter {
 		titlefont = generator.generateFont(titleparameter);
 		optionfont = generator.generateFont(optionparameter);
 		menu = new SongMenu(titlefont, optionfont, Constants.getAllSongs());
-		Song currentsong = Constants.getAllSongs().get(0);
-		stage = new Stage(currentsong, Constants.WIDTH/7.5F, 250);
 	}
 
 	public static void create_new_stage() {

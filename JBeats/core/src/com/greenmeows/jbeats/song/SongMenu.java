@@ -48,7 +48,8 @@ public class SongMenu {
 				}
 			}
 			if(Gdx.input.isKeyPressed(Keys.ENTER)) {
-				Constants.CURRENTSONG = songs.get(currentoption);
+				String foldername = songs.get(currentoption).getName().replace(" ", "");
+				Constants.CURRENTSONG = new Song(Constants.get_song_file()+"\\"+foldername);
 				Game.create_new_stage();
 			}
 			lasttime = Instant.now().toEpochMilli();
