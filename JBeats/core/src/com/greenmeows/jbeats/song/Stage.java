@@ -3,6 +3,7 @@ package com.greenmeows.jbeats.song;
 import java.time.Instant;
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
@@ -63,8 +64,6 @@ public class Stage {
 				break;
 			}
 		}
-		System.out.println("Score: "+score);
-		System.out.println("Note Count:"+song.getNotecount());
 		return score;
 	}
 	private float getAccuracy() {
@@ -101,13 +100,23 @@ public class Stage {
 		System.out.println("Quit map");
 	}
 	
+	public void results() {
+		Constants.CURRENTRESULTS = new ResultsScreen(judgements, getAccuracy());
+		song.getMusic().stop();
+		Constants.CURRENTSTATE = Constants.RESULTS;
+		System.out.println("Results");
+	}
+	
 	public void logic() {
 		if(started) {
 		for(int i = 0; i < lanes.size(); i++) {
 			lanes.get(i).logic();
 		}
 		if(endtime-(Instant.now().toEpochMilli()/1000) < 0) {
-			stop();
+			results();
+		}
+		if(Gdx.input.isButtonPressed(Keys.ESCAPE)) {
+			results();
 		}
 		}
 	}

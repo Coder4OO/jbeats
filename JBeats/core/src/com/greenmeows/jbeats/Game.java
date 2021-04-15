@@ -50,6 +50,9 @@ public class Game extends ApplicationAdapter {
 		case Constants.STAGE:
 			stage.draw();
 			break;
+		case Constants.RESULTS:
+			Constants.CURRENTRESULTS.draw();
+			break;
 		}
 		batch.end();
 	}
@@ -65,6 +68,9 @@ public class Game extends ApplicationAdapter {
 			break;
 		case Constants.STAGE:
 			stage.logic();
+			break;
+		case Constants.RESULTS:
+			Constants.CURRENTRESULTS.logic();
 			break;
 		}
 	}

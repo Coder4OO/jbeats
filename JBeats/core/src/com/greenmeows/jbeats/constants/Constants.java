@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+import com.greenmeows.jbeats.song.ResultsScreen;
 import com.greenmeows.jbeats.song.Song;
 
 public class Constants {
@@ -34,7 +35,7 @@ public class Constants {
 	public static final int RESULTS = 2;
 	public static final int QUIT = 3;
 	public static int CURRENTSTATE = MENU;
-	
+	public static ResultsScreen CURRENTRESULTS;
 	//UTIL
 	
 	public static String get_song_file() {
@@ -57,4 +58,10 @@ public class Constants {
 		}
 		return songs;
 	}
+	
+	//GRADE BOUNDARIES
+	public static final float GRADE_C = 50;
+	public static final float GRADE_B = GRADE_C+(GRADE_C/2);
+	public static final float GRADE_A = 87.5F;
+	public static final float GRADE_S = 95.5F;
 }
