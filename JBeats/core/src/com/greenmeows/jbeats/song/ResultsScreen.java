@@ -16,6 +16,7 @@ public class ResultsScreen {
 	private BitmapFont titlefont;
 	private BitmapFont judgementfont;
 	private BitmapFont gradefont;
+	private int miss;
 	private FreeTypeFontParameter titleparameter = new FreeTypeFontParameter();
 	private FreeTypeFontParameter judgementparameter = new FreeTypeFontParameter();
 	private FreeTypeFontParameter gradeparameter = new FreeTypeFontParameter();
@@ -44,7 +45,17 @@ public class ResultsScreen {
 		}
 	}
 	
-	public ResultsScreen(int[] judgements, float accuracy) {
+	private int getMiss(int notecount) {
+		int miss = 0;
+		int notes = 0;
+		for(int i=0; i < judgements.length; i++) {
+			notes += judgements[i];
+		}
+		miss = notecount-notes;
+		return miss;
+	}
+	
+	public ResultsScreen(int[] judgements, float accuracy, int notecount) {
 		this.judgements = judgements;
 		this.accuracy = accuracy;
 		this.grade = getGrade(this.accuracy);
@@ -57,6 +68,7 @@ public class ResultsScreen {
 		this.gradefont.setColor(gradecolor);
 		this.titlefont.setColor(Color.WHITE);
 		this.judgementfont.setColor(Color.WHITE);
+		this.miss = getMiss(notecount);
 	}
 	
 	private void back_to_menu() {
@@ -74,19 +86,22 @@ public class ResultsScreen {
 	
 	public void draw() {
 		titlefont.draw(Game.getBatch(), new StringBuffer("RESULTS"), Constants.WIDTH/2, Constants.HEIGHT/10*9);
-		for(int i=0; i < this.judgements.length; i++) {
+		for(int i=0; i < this.judgements.length+1; i++) {
 			switch(i) {
 			case 0:
-				judgementfont.draw(Game.getBatch(), new StringBuffer("MARVELLOUS: "+judgements[i]), Constants.WIDTH/10, Constants.HEIGHT/4*3-(135*i));
+				judgementfont.draw(Game.getBatch(), new StringBuffer("MARVELLOUS: "+judgements[i]), Constants.WIDTH/10, Constants.HEIGHT/4*3-(100*i));
 				break;
 			case 1:
-				judgementfont.draw(Game.getBatch(), new StringBuffer("PERFECT: "+judgements[i]), Constants.WIDTH/10, Constants.HEIGHT/4*3-(135*i));
+				judgementfont.draw(Game.getBatch(), new StringBuffer("PERFECT: "+judgements[i]), Constants.WIDTH/10, Constants.HEIGHT/4*3-(100*i));
 				break;
 			case 2:
-				judgementfont.draw(Game.getBatch(), new StringBuffer("GREAT: "+judgements[i]), Constants.WIDTH/10, Constants.HEIGHT/4*3-(135*i));
+				judgementfont.draw(Game.getBatch(), new StringBuffer("GREAT: "+judgements[i]), Constants.WIDTH/10, Constants.HEIGHT/4*3-(100*i));
 				break;
 			case 3:
-				judgementfont.draw(Game.getBatch(), new StringBuffer("OKAY: "+judgements[i]), Constants.WIDTH/10, Constants.HEIGHT/4*3-(135*i));
+				judgementfont.draw(Game.getBatch(), new StringBuffer("OKAY: "+judgements[i]), Constants.WIDTH/10, Constants.HEIGHT/4*3-(100*i));
+				break;
+			case 4:
+				judgementfont.draw(Game.getBatch(), new StringBuffer("MISS: "+miss), Constants.WIDTH/10, Constants.HEIGHT/4*3-(100*i));
 				break;
 			}
 		}

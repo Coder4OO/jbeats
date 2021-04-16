@@ -1,5 +1,5 @@
 Name/Better Days
-Duration/153
+Duration/10
 Speed/100
 Difficulty/1
 Path/audio.ogg

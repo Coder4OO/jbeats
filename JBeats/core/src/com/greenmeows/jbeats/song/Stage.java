@@ -101,7 +101,7 @@ public class Stage {
 	}
 	
 	public void results() {
-		Constants.CURRENTRESULTS = new ResultsScreen(judgements, getAccuracy());
+		Constants.CURRENTRESULTS = new ResultsScreen(judgements, getAccuracy(), song.getNotecount());
 		song.getMusic().stop();
 		Constants.CURRENTSTATE = Constants.RESULTS;
 		System.out.println("Results");
@@ -127,16 +127,16 @@ public class Stage {
 			for(int i = 0; i < judgements.length; i++) {
 				switch(i) {
 				case 0:
-					accuracydisplayfont.draw(Game.getBatch(), new StringBuffer("MARVELLOUS: "+judgements[i]), Constants.WIDTH/10, Constants.HEIGHT/3*2-(75*i));
+					accuracydisplayfont.draw(Game.getBatch(), new StringBuffer("MARVELLOUS: "+judgements[i]), Constants.WIDTH/10, Constants.HEIGHT/4*3-(75*i));
 					break;
 				case 1:
-					accuracydisplayfont.draw(Game.getBatch(), new StringBuffer("PERFECT: "+judgements[i]), Constants.WIDTH/10, Constants.HEIGHT/3*2-(75*i));
+					accuracydisplayfont.draw(Game.getBatch(), new StringBuffer("PERFECT: "+judgements[i]), Constants.WIDTH/10, Constants.HEIGHT/4*3-(75*i));
 					break;
 				case 2:
-					accuracydisplayfont.draw(Game.getBatch(), new StringBuffer("GREAT: "+judgements[i]), Constants.WIDTH/10, Constants.HEIGHT/3*2-(75*i));
+					accuracydisplayfont.draw(Game.getBatch(), new StringBuffer("GREAT: "+judgements[i]), Constants.WIDTH/10, Constants.HEIGHT/4*3-(75*i));
 					break;
 				case 3:
-					accuracydisplayfont.draw(Game.getBatch(), new StringBuffer("OKAY: "+judgements[i]), Constants.WIDTH/10, Constants.HEIGHT/3*2-(75*i));
+					accuracydisplayfont.draw(Game.getBatch(), new StringBuffer("OKAY: "+judgements[i]), Constants.WIDTH/10, Constants.HEIGHT/4*3-(75*i));
 					break;
 				}
 			}
